@@ -91,7 +91,10 @@ public class MainActivity extends AppCompatActivity {
         joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
-                tv1.setText("Angle: " + Integer.toString(angle) + '\n' + "Str: "+Integer.toString(strength));
+                String output = String.format("Angle %d\n Stre: %d", angle, strength);
+                if (mTcpClient != null) {
+                    mTcpClient.sendMessage(output);
+                }
             }
         });
 
